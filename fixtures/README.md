@@ -67,3 +67,25 @@ cd fixtures/envcheck-0.2.0 && PYTHONPATH=. python3 -m unittest discover -s tests
 ```
 
 核对 2026-11-01：9 个用例全通过。两组的产出保存为 [docs/runs/r4-baseline.bundle](../docs/runs/r4-baseline.bundle)（21 用例）与 [docs/runs/r4-treatment.bundle](../docs/runs/r4-treatment.bundle)（22 用例），`git clone` 后跑同一条命令都全绿。
+
+## ledger-0.2.0
+
+一个内存账本的 Go HTTP 服务（403 行代码 / 267 行测试 / 17 个用例 / 3 个包），加一份需求 [FEATURE.md](ledger-0.2.0/FEATURE.md)：加 `POST /transfers`，7 条需求（原子、金额为正、不能转给自己、账户不存在、幂等键、余额口径唯一、透支下限）。
+
+这份夹具是为验「流程深度与改动规模成比例」而造的。前一份（`envcheck`）验不出来，因为 85 行、4 条小需求的任务不会诱发过度拆分——**夹具没给被验的规则失败的机会**。这份放大到约 4.7 倍，并让"看起来可分"与"实际耦合"冲突：7 条需求看着像 7 个单元，但 R1 / R6 / R7 共用同一段临界区，拆开交付必然返工或留下两个余额口径。
+
+**埋了两处**，都在 0.2.0 上实测确认过：
+
+- **锁不可重入**：`sync.Mutex` 非 reentrant，在转账的临界区里复用公开的 `Balance()` 会死锁。R1（两条分录原子）与 R6（全服务只有一个余额口径）直接冲突，必须下推到 store 或新增不加锁的内部函数。
+- **错误信封没有 409**：`writeErr` 的 status map 没有 `conflict` 键，取零值后回落到 500。R7 要 409，照抄现有写法会静默变成 500；若用例只断言 `error == "overdraft"` 而不断言状态码，仍然通过。
+
+**度量**：拆成几个单元、拆分依据是需求条数还是耦合关系、计划体量、以及两处埋点各组是否踩中。
+
+夹具自带一套[黑盒验收用例](ledger-0.2.0/acceptance/probe.py)，只打公开 HTTP 接口，对内部设计无偏好。它在实验启动前写好、两组都看不到：
+
+```sh
+cd fixtures/ledger-0.2.0 && GOFLAGS=-mod=mod GOPROXY=off go test ./...
+python3 fixtures/ledger-0.2.0/acceptance/probe.py fixtures/ledger-0.2.0 8741
+```
+
+核对 2026-11-01：17 个用例全通过；验收用例在 0.2.0 上 3/41 通过。那 3 条是故意留的旧行为守卫（单账户记账仍 201、未知账户仍 404、错误方法仍 405），其余 38 条必须在 0.2.0 上失败。初版有 4 条是**空洞通过**的（R6-c、R5-c、R5-d、R7-g——两边都是 404 时"两值相等"自然成立），启动前已改成同时断言取值，否则这套验收自己就犯了它要检查的毛病。
