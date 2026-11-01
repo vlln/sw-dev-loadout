@@ -1,6 +1,6 @@
 # 正文自查记录
 
-对象：`skills/readme-writing/SKILL.md`（终稿 152 行，仍低于 200 行建议线）。方法：先 `grep` 机械项，再逐句读，按"一条规则只回答一个问题"的标准挑出候选，再改。
+对象：`skills/readme-writing/SKILL.md`（v0.2.0 定稿时 152 行；2026-11-01 为 164 行）。方法：先 `grep` 机械项，再逐句读，按"一条规则只回答一个问题"的标准挑出候选，再改。
 
 ## 1 肥句：一句话同时回答两个问题
 
@@ -35,13 +35,13 @@
 | execution（用什么做、跑哪条命令、产物在哪） | 正文无；references 有取证命令 | 命令只服务"这条判据怎么验"，不是"这个任务怎么做" |
 | quality | 全部判据、风格、反例、自检 | 主面 |
 
-事实（宿主渲染行为、徽章服务、Markdown 支持）不归面，按作用域放在"事实"一节，带来源与核对日期 **2026-10-31**：`SKILL.md` 2 处，`references/visual-cookbook.md` 1 处。
+事实（宿主渲染行为、徽章服务、Markdown 支持）不归面，放在"事实"一节，带来源与核对日期 **2026-10-31**：`SKILL.md` 2 处，`references/visual-cookbook.md` 1 处。
 
 ## 4 机械项
 
 | 检查 | 结果 |
 |---|---|
-| 顶级字段只有 6 个 | `name` / `description` / `license` / `metadata`，无自造字段；坐标在 `metadata.face=quality`、`metadata.scope=subject` |
+| 顶级字段只有 6 个 | `name` / `description` / `license` / `metadata`，无自造字段；坐标在 `metadata.face=quality`（`metadata.scope` 随作用域维度取消已删） |
 | `name` 与目录同名、kebab-case | `readme-writing` = 目录名 |
 | `description` 长度 | 369 字符（上限 1024；前 500 字符已含"README + 重写/审 + 信息层级 + 徽章"全部决定性信息） |
 | 顺序：触发场景在前、能力在后 | 首句"当要写、重写或审一份项目 README……时使用"；能力在其后 |
@@ -54,4 +54,8 @@
 
 - **类型分支只有 4 行**。库/CLI、GUI、清单、规范四类的首屏差异是靠观察归纳的，样本各只有一两个仓库；monorepo、内部库、硬件/游戏 mod 这几类没有判据，遇到时只能套通用规则。
 - **"讲究"部分落不到二进制**。层级、取舍、标题这些能判过 / 不过；"排版好看"里仍有靠眼力的部分（间距、图片节奏），自检只能管住可数的项。
-- **触发只有文本判定**。见 `docs/trigger-tests.md`：6 中 4 不中是照描述推的，没有真实加载轨迹。
+- **触发只有文本判定**。见 [trigger-tests.md](trigger-tests.md)：6 中 4 不中是照描述推的，没有真实加载轨迹。
+
+## 6 本页的限制
+
+这是一次自查，不是独立评审：写 skill 的和查 skill 的是同一方，漏掉的判断两边一样会漏。第 4 节的机械项可以复算，第 1–3 节的归类结论不能。
