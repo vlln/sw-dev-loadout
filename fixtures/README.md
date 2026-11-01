@@ -44,3 +44,26 @@ git clone docs/runs/r3-result.bundle r3 && cd r3 && npm test
 ```
 
 核对 2026-11-01：34 个用例全通过；同一套用例在 `v0.3.0` 上 12 通过 / 22 失败。
+
+## envcheck-0.2.0
+
+一个只用 Python 标准库的小命令行工具（两个模块共 85 行，9 个用例全绿），加一份需求 [FEATURE.md](envcheck-0.2.0/FEATURE.md)：加 `--quiet`、flag 顺序任意、rc 里带 `=` 的行按不可用处理、所有退出码 2 的信息都要带 rc 路径。
+
+和 `tally` 那份夹具刻意不同：换语言（Python / Node）、换规模、换任务性质（四条小修改 vs 一次功能新增）。
+
+**任务**：先写实施计划到仓库外，再按自己的计划实现、提交、验证，并报告计划里哪些地方不对。
+
+**埋了两处**，都在 0.2.0 上实测确认过：
+
+- 需求 4 在两条退出码 2 的路径上**不可满足**：`--rc` 缺参数、多余参数都发生在读 rc 之前，没有真实路径可带。照字面做就会报出一个工具从未打算读的文件名。
+- `cannot read` 这条信息**本来就带路径**。为需求 4 写的那条用例在旧版本上就是通过的，把它当作"新行为的证据"是错的。
+
+**度量**：新增用例里有几条在 0.2.0 上就通过、其中几条是作者自己识别出来的守卫、几条是漏网。
+
+自检：
+
+```sh
+cd fixtures/envcheck-0.2.0 && PYTHONPATH=. python3 -m unittest discover -s tests
+```
+
+核对 2026-11-01：9 个用例全通过。两组的产出保存为 [docs/runs/r4-baseline.bundle](../docs/runs/r4-baseline.bundle)（21 用例）与 [docs/runs/r4-treatment.bundle](../docs/runs/r4-treatment.bundle)（22 用例），`git clone` 后跑同一条命令都全绿。
