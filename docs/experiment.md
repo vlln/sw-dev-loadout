@@ -228,6 +228,27 @@ $ 恢复后重跑  →  Valid skill
 
 **发现一处缺口。** 需求 4 在两条路径上不可满足，处理组靠 `contract-prose` 的"诊断必须指向真实的失败主体"把它挡住了，基线则填了一个工具从未打算读的文件名。但这七份里没有任何一条要求"动手前先检查需求自身是否自相矛盾"——换一个不涉及诊断文本的矛盾需求，这套 set 还是会直接照做。
 
+### 第五轮：大夹具复验「按规模裁剪」
+
+换领域、换语言（Go HTTP 服务 / 403 行 / 7 条需求加一个转账端点），刻意让"看起来可分"与"实际耦合"冲突。预测在动手前写下并保留。完整记录见 [runs/r5-notes.md](runs/r5-notes.md)。
+
+装置失败了两次才拿到证据：第一次"计划+实现同一个 agent"，两组都在预算耗尽时中止；改成计划/执行两段后，两个执行者又双双在实现中途耗尽。所以本轮主证据是计划阶段，执行阶段只有半成品（都已提交、测试全绿、bundle 可恢复）。
+
+| | 基线 | 处理组 |
+|---|---|---|
+| 计划行数 | 491 | 723 |
+| 单元数 | 4 | 3 |
+| 拆分依据 | 耦合，显式否决按需求拆 7 个 | 爆炸半径，显式否决其他切法 |
+| 新增用例逐条标注旧版本结果 | 全部，含实测值 | 全部，另加弱证据标注与负控 |
+| 两处埋点（死锁、缺 409） | 都指出并绕开 | 都指出并绕开 |
+| 没埋的 Parse 溢出 | 自己找到并修复 | 自己找到并修复 |
+
+**「按规模裁剪」仍是候选，但证据结构变了。** 这轮终于给了它失败的机会，而预言的失败形态（基线按需求条数拆）没有出现——基线一样按耦合切。第二轮的真实缺陷形态（处理组过度拆分）也没有复发：处理组切得比基线还少，多出的篇幅花在风险相应的过程产物上（带自证的口径门禁、决策记录、把一条歧义需求交人决定）。
+
+**「新证据必须在旧版本上真跑」维持确认，但差分消失。** 这轮基线的计划也逐条给出了旧版本判定——三轮、四轮里"基线没做而 skill 要求做"的差分，这轮基线自己做到了。这套 set 能赢基线的窗口在缩小，后续再用"基线会犯、skill 会拦"的预测结构去验，分辨力只会更差。
+
+**夹具发现一处我没埋的真缺陷**（Parse 静默溢出，绕过 R2），两组都自己找到，不计入 skill 功劳。教训（对被改动的函数做边界扫描、执行预算要够完成任务）已写进 `improvement-loop`。
+
 ## 怎么复现
 
 夹具与每一轮的原始产出都在仓库里：输入看 [fixtures/](../fixtures/)，产出看 [docs/runs/](runs/)。
@@ -238,8 +259,9 @@ $ 恢复后重跑  →  Valid skill
 | 2 写计划 | `fixtures/tally-0.3.0` | [r2-baseline.md](runs/r2-baseline.md) | [r2-treatment.md](runs/r2-treatment.md) |
 | 3 执行计划 | `fixtures/tally-0.3.0` + 第二轮处理组的计划 | 无（只跑了处理组） | [r3-treatment.md](runs/r3-treatment.md)、[r3-result.bundle](runs/r3-result.bundle) |
 | 4 计划并实现 | `fixtures/envcheck-0.2.0` | [计划](runs/r4-baseline-plan.md)、[报告](runs/r4-baseline-report.md)、[bundle](runs/r4-baseline.bundle) | [计划](runs/r4-treatment-plan.md)、[报告](runs/r4-treatment-report.md)、[bundle](runs/r4-treatment.bundle) |
+| 5 写计划（执行中止） | `fixtures/ledger-0.2.0` | [计划](runs/r5-baseline-plan.md)、[bundle](runs/r5-baseline.bundle)（半成品） | [计划](runs/r5-treatment-plan.md)、[bundle](runs/r5-treatment.bundle)（半成品） |
 
-第四轮的预测写在动手前，见 [runs/r4-predictions.md](runs/r4-predictions.md)，结果出来后未改动。
+第四、五轮的预测写在动手前，见 [runs/r4-predictions.md](runs/r4-predictions.md) 与 [runs/r5-predictions.md](runs/r5-predictions.md)，结果出来后未改动。第五轮的中止记录、验收探针的判定边界与夹具里没埋的缺陷分别见 [runs/r5-aborted-attempt.md](runs/r5-aborted-attempt.md)、[runs/r5-probe-limits.md](runs/r5-probe-limits.md)、[runs/r5-unplanted-defect.md](runs/r5-unplanted-defect.md)。
 
 ## 这些结论有多硬
 
@@ -248,5 +270,6 @@ $ 恢复后重跑  →  Valid skill
 - **每轮只跑了一次。** 同一夹具重跑的波动没有测过，所以第二轮「336 vs 167 行」这类数字只能说明方向，不能当作效应量。
 - **第三轮没有基线。** 只跑了处理组的计划，没有让另一个 agent 执行基线那份 167 行计划，所以「计划更完整」与「执行更顺」之间没有对照。
 - **出题与答题是同一个模型。** 写 skill、造夹具、跑两组用的是同一个模型，对照的盲点与 skill 的盲点重合。
-- **"新证据要在旧版本上真跑"已在两个夹具上出现，算确认；"按规模裁剪"仍只有一个夹具，仍是候选。** 第四轮为验后者选了小任务，结果两组都克制，测不出差别。
+- **"新证据要在旧版本上真跑"已在两个夹具上出现，算确认；"按规模裁剪"在第五轮给了失败机会仍未出现差分，仍是候选。** 第五轮基线把同样的纪律自己做到了——用"基线会犯、skill 会拦"的结构去验，分辨力在消失。
+- **第五轮执行阶段不完整。** 单个 agent 的预算和 403 行的夹具冲突，两组执行者都中止；计划阶段的对照完整，验收探针没跑出有区分度的结果。
 - **触发没有实测。** 七份 skill 的描述是人工按真实请求判的，没有真实加载轨迹，也没做新会话冒烟。
