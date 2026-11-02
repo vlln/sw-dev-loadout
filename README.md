@@ -1,23 +1,21 @@
 # sw-dev-loadout
 
-一组 Agent Skill（7 份），覆盖做软件开发要回答的三类问题：什么时候做什么、凭什么算合格、跑什么证据怎么落地。
+一组 Agent Skill（8 份），覆盖做软件开发要回答的三类问题：什么时候做什么、凭什么算合格、跑什么证据怎么落地。
 
 面向任何软件项目，不绑定某个仓库——仓库专属的脚本名、目录约定与界面常量都留在源材料里，没有带进来。
 
 ## 安装
 
-这个仓库还没有推到远端，先克隆或下载，然后按需装：
-
 ```sh
-skit install ./skills/delivery-loop ./skills/review-gate      # 流程
-skit install ./skills/engineering-standards ./skills/contract-prose ./skills/failure-handling ./skills/change-evidence   # 质量
-skit install ./skills/change-landing                           # 执行
+skit install vlln/sw-dev-loadout/skills/delivery-loop vlln/sw-dev-loadout/skills/review-gate      # 流程
+skit install vlln/sw-dev-loadout/skills/engineering-standards vlln/sw-dev-loadout/skills/contract-prose vlln/sw-dev-loadout/skills/failure-handling vlln/sw-dev-loadout/skills/change-evidence vlln/sw-dev-loadout/skills/readme-writing   # 质量
+skit install vlln/sw-dev-loadout/skills/change-landing                           # 执行
 skit check
 ```
 
-七份互不引用，装一份也能用。一个任务加载哪几份由任务决定，不需要装全。
+本地开发时克隆后用 `./skills/<名>` 直装。八份互不引用，装一份也能用。一个任务加载哪几份由任务决定，不需要装全。
 
-## 七份各管什么
+## 八份各管什么
 
 | skill | 它主要回答的问题 | 什么时候激活 |
 |---|---|---|
@@ -27,6 +25,7 @@ skit check
 | [contract-prose](skills/contract-prose/SKILL.md) | 注释、文档、提示词、界面文案该写什么才算合格 | 写或审文档与文案、清理变更叙述与思考过程泄漏 |
 | [failure-handling](skills/failure-handling/SKILL.md) | 失败路径设计得对不对 | 加 catch、决定失败后能否继续、设计重试、审错误文案 |
 | [change-evidence](skills/change-evidence/SKILL.md) | 这个改动凭什么算被验证 | 选测试范围、推送前取舍检查、查 CI 不稳定、性能结论 |
+| [readme-writing](skills/readme-writing/SKILL.md) | 一份 README 对读者算不算好 | 写、重写或审项目 README；判断徽章、截图、视频、折叠区用不用、放在哪 |
 | [change-landing](skills/change-landing/SKILL.md) | 怎么把改动安全落到主干 | 提交、推送、改写历史、落地一组 PR、写 PR 描述 |
 
 一条核心断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
@@ -57,6 +56,7 @@ skit check
 |---|---|
 | [docs/plan.md](docs/plan.md) | 地图与取舍：七份怎么分、哪些材料合并、哪些丢弃、为什么 |
 | [docs/experiment.md](docs/experiment.md) | 五轮对照的度量、结论与限制 |
+| [docs/readme/](docs/readme/) | readme-writing 自己的一条证据线：同一 README 四次产出 354→372→148→140 行 |
 | [fixtures/](fixtures/) | 实验输入：自检方法与已知缺陷 |
 | [docs/runs/](docs/runs/) | 保存下来的原始产出，含第三轮结果的 git bundle |
 | [docs/v1/](docs/v1/) | 冻结的第一版，用于对照后续改动 |
