@@ -1,23 +1,24 @@
-# sw-dev-loadout
+<p align="center">
+  <img src="docs/assets/hero.png" alt="sw-dev-loadout：一条流水线——漏斗、评审、天平、门禁、封箱五个工位" width="100%">
+</p>
 
-一组 Agent Skill（8 份），覆盖做软件开发要回答的三类问题：什么时候做什么、凭什么算合格、跑什么证据怎么落地。
+<h1 align="center">sw-dev-loadout</h1>
+
+<p align="center"><b>一组 Agent Skill（8 份）：什么时候做什么、凭什么算合格、怎么落地。</b></p>
+
+<p align="center">
+  <a href="#八份各管什么">八份各管什么</a> ·
+  <a href="#安装">安装</a> ·
+  <a href="#它有多少证据">证据</a>
+</p>
+
+<p align="center">
+  <a href="https://agentskills.io"><img alt="Agent Skills" src="https://img.shields.io/badge/Agent_Skills-规范-4D6BFE?style=flat-square"></a>
+</p>
+
+<br>
 
 面向任何软件项目，不绑定某个仓库——仓库专属的脚本名、目录约定与界面常量都留在源材料里，没有带进来。
-
-[![Agent Skills](https://img.shields.io/badge/Agent_Skills-规范-4D6BFE?style=flat-square)](https://agentskills.io)
-
-## 安装
-
-```sh
-skit install vlln/sw-dev-loadout/skills/delivery-loop vlln/sw-dev-loadout/skills/review-gate      # 流程
-skit install vlln/sw-dev-loadout/skills/engineering-standards vlln/sw-dev-loadout/skills/contract-prose vlln/sw-dev-loadout/skills/failure-handling vlln/sw-dev-loadout/skills/change-evidence vlln/sw-dev-loadout/skills/readme-writing   # 质量
-skit install vlln/sw-dev-loadout/skills/change-landing                           # 执行
-skit check
-```
-
-本地开发时克隆后用 `./skills/<名>` 直装。八份互不引用，装一份也能用。一个任务加载哪几份由任务决定，不需要装全。
-
-跑通的样子：`skit list` 里出现刚装的几份，且 `skit check` 没有指向它们的报错。
 
 ## 八份各管什么
 
@@ -33,6 +34,19 @@ skit check
 | [change-landing](skills/change-landing/SKILL.md) | 怎么把改动安全落到主干 | 提交、推送、改写历史、落地一组 PR、写 PR 描述 |
 
 一条核心断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
+
+## 安装
+
+```sh
+skit install vlln/sw-dev-loadout/skills/delivery-loop vlln/sw-dev-loadout/skills/review-gate      # 流程
+skit install vlln/sw-dev-loadout/skills/engineering-standards vlln/sw-dev-loadout/skills/contract-prose vlln/sw-dev-loadout/skills/failure-handling vlln/sw-dev-loadout/skills/change-evidence vlln/sw-dev-loadout/skills/readme-writing   # 质量
+skit install vlln/sw-dev-loadout/skills/change-landing                           # 执行
+skit check
+```
+
+本地开发时克隆后用 `./skills/<名>` 直装。八份互不引用，装一份也能用。一个任务加载哪几份由任务决定，不需要装全。
+
+跑通的样子：`skit list` 里出现刚装的几份，且 `skit check` 没有指向它们的报错。
 
 ## 它有多少证据
 
