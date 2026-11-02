@@ -4,12 +4,12 @@
 
 <h1 align="center">sw-dev-loadout</h1>
 
-<p align="center"><b>一组 Agent Skill（8 份）：什么时候做什么、凭什么算合格、怎么落地。</b></p>
+<p align="center"><b>软件开发里那些躲不开的活，一样一份 skill。</b></p>
 
 <p align="center">
   <a href="#八份各管什么">八份各管什么</a> ·
-  <a href="#安装">安装</a> ·
-  <a href="#它有多少证据">证据</a>
+  <a href="#怎么配一组">怎么配一组</a> ·
+  <a href="#安装">安装</a>
 </p>
 
 <p align="center">
@@ -18,22 +18,39 @@
 
 <br>
 
-面向任何软件项目，不绑定某个仓库——仓库专属的脚本名、目录约定与界面常量都留在源材料里，没有带进来。
+做一个功能，来回就那些事：先把需求吃透、别做完才发现不可行；写的时候想清楚失败路径；交之前知道该跑哪些测试；提交、推送、开 PR；别人看的时候能一眼判出哪里该拦；项目里的约定不能只写在文档里；README 要能让陌生人看懂。
+
+每一件都有一套该守的纪律，但每次都靠记性。这八份 skill 就是把它们一样一份固定下来。
 
 ## 八份各管什么
 
 | skill | face | domain | 介绍 |
 |---|---|---|---|
-| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` |  软件开发 | 一轮交付怎么推进、交接、算完 |
-| [review-gate](skills/review-gate/SKILL.md) | `process` |  软件开发 | 评审流水线与风险归口 |
-| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` |  软件开发 | 约定的硬化、分层与门禁 |
-| [contract-prose](skills/contract-prose/SKILL.md) | `quality` |  文档 | 散文只写契约 |
-| [failure-handling](skills/failure-handling/SKILL.md) | `quality` |  软件开发 | 失败路径设计 |
-| [change-evidence](skills/change-evidence/SKILL.md) | `quality` |  软件开发 | 改动该跑什么证据 |
-| [readme-writing](skills/readme-writing/SKILL.md) | `quality` |  文档 | README 的读者优先判据 |
-| [change-landing](skills/change-landing/SKILL.md) | `execution` |  软件开发 | 提交、推送、落地 PR |
+| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` | 软件开发 | 一轮活怎么推进，做到哪儿算完成 |
+| [review-gate](skills/review-gate/SKILL.md) | `process` | 软件开发 | 看别人的 PR：哪些该拦、谁批准、要求本身是否可满足 |
+| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` | 软件开发 | 给项目立规矩：怎么让约定真的会拒绝违规 |
+| [contract-prose](skills/contract-prose/SKILL.md) | `quality` | 文档 | 写注释与文案：只写契约，不写流水账 |
+| [failure-handling](skills/failure-handling/SKILL.md) | `quality` | 软件开发 | 写会失败的操作：失败类型、谁处理、能不能继续 |
+| [change-evidence](skills/change-evidence/SKILL.md) | `quality` | 软件开发 | 这次改动该跑哪些测试、凭什么算验证过 |
+| [readme-writing](skills/readme-writing/SKILL.md) | `quality` | 文档 | 写或重写 README：读者优先、可交付自查 |
+| [change-landing](skills/change-landing/SKILL.md) | `execution` | 软件开发 | 提交、推送、切片、落地一组 PR |
 
-一条核心断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
+八份互不引用，装一份也能用。一条断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
+
+## 怎么配一组
+
+不用全装。按你在做什么带几份——这组就是一次任务的 loadout：
+
+| 你在做什么 | 带哪几份 |
+|---|---|
+| 修个 bug、改个小东西 | `change-evidence` `change-landing` |
+| 接一个新功能 | `delivery-loop` `review-gate` `change-evidence` |
+| 发一版 | `delivery-loop` `change-landing` `readme-writing` |
+| 给项目立规矩 | `engineering-standards` `review-gate` |
+| 写模块文档或改文案 | `contract-prose` |
+| 动支付、迁移、权限这些出错代价大的地方 | `failure-handling` `review-gate` `change-evidence` |
+
+装了 [dsh-loadout](https://github.com/vlln/skill-loadout) 插件的话，上面每一行可以直接存成一个编组，会话里一键切换。
 
 ## 安装
 
@@ -58,40 +75,31 @@ npx skills add vlln/sw-dev-loadout --skill readme-writing    # 例；换 --skill
 Run `npx skills use "vlln/sw-dev-loadout@readme-writing"` and follow the generated skill instructions now. Read its complete output, redirecting it to a temporary file first if necessary. Resolve relative paths from the supporting-files directory it provides.
 ```
 
-本地开发时克隆后用 `./skills/<名>` 直装。八份互不引用，装一份也能用。一个任务加载哪几份由任务决定，不需要装全。
+本地开发时克隆后用 `./skills/<名>` 直装。
 
 跑通的样子：`skit list` 里出现刚装的几份，且 `skit check` 没有指向它们的报错。
 
+## 为什么是这八份
+
+按"这份 skill 主要回答哪个问题"分，只有三种：**流程**（什么时候做什么、谁决定）、**质量**（凭什么算合格）、**执行**（具体怎么动手）。八份里流程 2、质量 5、执行 1，拆分依据是"两条规则会不会抢同一段指令"，不是按开发阶段切。
+
+一个任务带 2–4 份是常态——这也是 loadout 这个名字的来源：一次任务实际加载的那一组。完整分工与取舍见 [docs/plan.md](docs/plan.md)。
+
 ## 它有多少证据
 
-五轮同题对照，两个互不知情的 agent，同一输入，只差可用材料：
+这八份不是推演出来的，是五轮同题对照实验里逼出来的：每个实验两组 agent 拿同样的输入，只差给不给这组 skill。
 
-| 轮 | 任务 | 结果 |
-|---|---|---|
-| 1 | 审一份埋了 11 个问题的 diff | **打平**，两组都命中 6 个阻断项、零误报 |
-| 2 | 为一个小 CLI 写实施计划 | 流程与落地更完整（4 个 PR 带依赖序与逐 PR 回退），代价是篇幅翻倍（336 vs 167 行） |
-| 3 | 把第二轮的计划交给另一个 agent 执行 | 计划骨架成立、34 个用例全绿，但执行时撞上 16 处问题含 4 处自相矛盾 |
-| 4 | 换夹具（Python / 85 行 / 四条小需求）复验前几轮逼出的规则 | 处理组给每条新用例预判旧版本结果；基线有两条新用例在旧版本上就通过而未被发现 |
-| 5 | 换大夹具（Go / 403 行 / 7 条需求）验「按规模裁剪」 | 预言的过度拆分两组都没犯；两组都自己找到一处没埋的溢出缺陷；执行阶段双双中止，主证据是计划 |
-
-**这组 skill 的作用是让纪律成为默认，不是让判断变聪明。** 第一轮说明质量面的判断力在原始材料里已经足够；真正的增益在流程与落地的完整性上，风险是过度流程。
-
-前四轮各逼出一条规则：按规模裁剪流程、切片看爆炸半径、新证据必须在改动前的版本上真跑一遍、照做前先判要求在所有分支上是否可满足。第五轮没有逼出新规则，它改变的是证据结构：
-
-其中"新证据要在旧版本上真跑"已在两个夹具上复现，算确认，但第五轮基线自己也做到了，差分在消失；"按规模裁剪"在第五轮有了失败的机会而失败没来，仍是候选，但和"没给过机会"不是一回事。
-
-夹具与每一轮的原始产出都在仓库里：[fixtures/](fixtures/)、[docs/runs/](docs/runs/)。结论与它有多硬见 [docs/experiment.md](docs/experiment.md)——每轮只跑过一次，补的规则都只被一个夹具逼出来过。
+一句话结论：**它让纪律成为默认，不是让判断变聪明**——质量面的判断力本来就不差（第一轮审 diff 打平），真正的增益在流程完整性与验证纪律上，风险是过度流程。各轮的数据、被推翻的预测与"这些结论有多硬"都在 [docs/experiment.md](docs/experiment.md)。
 
 ## 文档
 
 | 路径 | 是什么 |
 |---|---|
-| [docs/plan.md](docs/plan.md) | 地图与取舍：七份怎么分、哪些材料合并、哪些丢弃、为什么 |
+| [docs/plan.md](docs/plan.md) | 八份怎么分、哪些材料合并、哪些丢弃、为什么 |
 | [docs/experiment.md](docs/experiment.md) | 五轮对照的度量、结论与限制 |
-| [docs/readme/](docs/readme/) | readme-writing 自己的一条证据线：同一 README 四次产出 354→372→148→140 行 |
-| [fixtures/](fixtures/) | 实验输入：自检方法与已知缺陷 |
+| [docs/readme/](docs/readme/) | readme-writing 自己的证据线：同一 README 四次产出 354→372→148→140 行 |
+| [fixtures/](fixtures/) | 实验输入与已知缺陷 |
 | [docs/runs/](docs/runs/) | 保存下来的原始产出，含第三轮结果的 git bundle |
-| [docs/v1/](docs/v1/) | 冻结的第一版，用于对照后续改动 |
 
 ## 许可
 
