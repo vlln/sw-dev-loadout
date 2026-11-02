@@ -32,6 +32,44 @@
 
 它是精选入口，不是目录：只放读者真的会点的几个，因此不受"手写 TOC 必须与标题逐条一致"的约束——但也意味着放进来的每一个都必须真能跳到。
 
+## 海报式首屏（最终用户产品）
+
+读者不是开发者时，首屏的任务不是让人立刻复制命令，而是让人愿意往下滚。整屏居中构图：hero 图（铺满、深浅两版）、居中标题、居中粗体定位句、一行导航、一排徽章。
+
+```html
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hero-dark.webp">
+    <img src="docs/assets/hero-light.webp" alt="产品名：一句话定位" width="100%">
+  </picture>
+</p>
+
+<h1 align="center">产品名</h1>
+
+<p align="center"><b>一句话定位：它是什么、给谁用。</b></p>
+
+<p align="center">
+  <a href="releases/latest">下载安装</a> ·
+  <a href="#三步上手">三步上手</a> ·
+  <a href="#问答">问答</a> ·
+  <a href="README.en.md">English</a>
+</p>
+
+<p align="center">
+  <img alt="宿主与版本" src="https://img.shields.io/badge/<宿主>-<版本>-111?style=flat-square">
+  <img alt="平台" src="https://img.shields.io/badge/<平台>-111?style=flat-square">
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/MIT-开源-111?style=flat-square"></a>
+  <a href="https://github.com/<owner>/<repo>/stargazers"><img alt="Star" src="https://img.shields.io/github/stars/<owner>/<repo>?style=flat-square&color=111"></a>
+</p>
+
+<br>
+```
+
+- 徽章全部同一个 `style`、同一个色系（上例都是 `flat-square` + `111`）；排在一起要像一套。
+- 导航 3–6 个，链到读者最常要的节；跨语言切换也放这里。
+- 节与节之间一个 `<br>`，比空行更稳地撑开节奏。
+- 开发者工具不要用这套：裸排更快，海报式构图对要复制命令的人是延迟。
+
 ## 徽章
 
 动态徽章（值由服务端生成，不会过期）：
