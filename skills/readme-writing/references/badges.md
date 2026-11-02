@@ -105,7 +105,35 @@ URL 格式与服务能力核对于 **2026-11-02**（抽样实测，见文末）�
 2. **dynamic 系列**：shields 直接从任意 JSON / TOML / XML / YAML 文件或正则匹配里取值：`img.shields.io/dynamic/json?url=<地址>&query=<JSONPath>&label=<左>`。适合值已经在某个配置文件里的情况。
 3. **完全离线**：用 [badge-maker](https://www.npmjs.com/package/badge-maker) 在本地生成 SVG 收进仓库，或自托管 shields。内网项目的徽章不要指向公网 shields——读者打不开。
 
-## 八、常见但过不了规则的
+## 八、skill 与 dsh 生态徽章
+
+**Agent Skills 规范**。符合规范的 skill 仓库可以给一枚静态徽章，链到规范页：
+
+```markdown
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-规范-4D6BFE?style=flat-square)](https://agentskills.io)
+```
+
+社区里出现过第三方"verified"徽章服务，未见稳定公认的，先不放。
+
+**DSH 官方徽章**。DeepSeek Harness 自带一个内置 skill `dsh-badge`（npm 包 `@deepseek-ai/dsh-skill-badge`），它规定的官方徽章：
+
+```markdown
+[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
+```
+
+使用规则（官方 skill 原文，核对 2026-11-02，本机安装的 dsh 内）：放在文档或章节的**末尾**；不改颜色、logo、措辞与链接目标；渲染尺寸 121×20；飞书这类远程图片加载不可靠的系统里改用包内 PNG 资产，不要另生成一枚。徽章 URL 实测 200。
+
+**DSH 插件兼容徽章**（社区约定，非官方）：宿主版本与平台用静态徽章写，例如：
+
+```markdown
+![DeepSeek Harness 0.2.x](https://img.shields.io/badge/DeepSeek%20Harness-0.2.x-111?style=flat-square)
+```
+
+来源：dsh-media-desk README（核对 2026-11-01）。版本号会过期，写成 `0.2.x` 这种区间比写死小版本活得久。
+
+`logo=deepseek` 在 simple-icons 里存在（2026-11-02 实测：渲染出的 SVG 含图标；不存在的 slug 会静默掉图标，所以用前照这个方法验一次）。
+
+## 九、常见但过不了规则的
 
 下列徽章都存在、都有人用，但都过不了 SKILL.md 的"每枚回答一个真问题"：
 
