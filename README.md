@@ -22,16 +22,16 @@
 
 ## 八份各管什么
 
-| skill | face | scope | 介绍 |
+| skill | face | domain | 介绍 |
 |---|---|---|---|
-| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` | 通用 | 一轮交付怎么推进、交接、算完 |
-| [review-gate](skills/review-gate/SKILL.md) | `process` | 有 PR 评审的项目 | 评审流水线与风险归口 |
-| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` | 通用 | 约定的硬化、分层与门禁 |
-| [contract-prose](skills/contract-prose/SKILL.md) | `quality` | 通用 | 散文只写契约 |
-| [failure-handling](skills/failure-handling/SKILL.md) | `quality` | 通用 | 失败路径设计 |
-| [change-evidence](skills/change-evidence/SKILL.md) | `quality` | 有测试与 CI 的项目 | 改动该跑什么证据 |
-| [readme-writing](skills/readme-writing/SKILL.md) | `quality` | GitHub 与包页面 | README 的读者优先判据 |
-| [change-landing](skills/change-landing/SKILL.md) | `execution` | Git + PR 平台 | 提交、推送、落地 PR |
+| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` |  软件开发 | 一轮交付怎么推进、交接、算完 |
+| [review-gate](skills/review-gate/SKILL.md) | `process` |  软件开发 | 评审流水线与风险归口 |
+| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` |  软件开发 | 约定的硬化、分层与门禁 |
+| [contract-prose](skills/contract-prose/SKILL.md) | `quality` |  文档 | 散文只写契约 |
+| [failure-handling](skills/failure-handling/SKILL.md) | `quality` |  软件开发 | 失败路径设计 |
+| [change-evidence](skills/change-evidence/SKILL.md) | `quality` |  软件开发 | 改动该跑什么证据 |
+| [readme-writing](skills/readme-writing/SKILL.md) | `quality` |  文档 | README 的读者优先判据 |
+| [change-landing](skills/change-landing/SKILL.md) | `execution` |  软件开发 | 提交、推送、落地 PR |
 
 一条核心断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
 
