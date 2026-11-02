@@ -22,16 +22,16 @@
 
 ## 八份各管什么
 
-| skill | face | 它主要回答的问题 | 什么时候激活 |
+| skill | face | scope | 介绍 |
 |---|---|---|---|
-| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` | 一轮交付怎么推进、谁能决定、怎么交接、哪个完成声明算哪一层 | 跨会话推进、接手在途工作、中途改范围、判断"这算做完了吗" |
-| [review-gate](skills/review-gate/SKILL.md) | `process` | 谁来看、看几轮、发现怎么核验、多大风险归谁批 | 评审 PR、判断一处发现算不算阻塞、判断一条要求是否在所有分支上可满足、多轮不收敛 |
-| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` | 一条约定怎么才算真的存在 | 建立或审计工程规范、规范落不了地、新增门禁、文档与代码漂移 |
-| [contract-prose](skills/contract-prose/SKILL.md) | `quality` | 注释、文档、提示词、界面文案该写什么才算合格 | 写或审文档与文案、清理变更叙述与思考过程泄漏 |
-| [failure-handling](skills/failure-handling/SKILL.md) | `quality` | 失败路径设计得对不对 | 加 catch、决定失败后能否继续、设计重试、审错误文案 |
-| [change-evidence](skills/change-evidence/SKILL.md) | `quality` | 这个改动凭什么算被验证 | 选测试范围、推送前取舍检查、查 CI 不稳定、性能结论 |
-| [readme-writing](skills/readme-writing/SKILL.md) | `quality` | 一份 README 对读者算不算好 | 写、重写或审项目 README；判断徽章、截图、视频、折叠区用不用、放在哪 |
-| [change-landing](skills/change-landing/SKILL.md) | `execution` | 怎么把改动安全落到主干 | 提交、推送、改写历史、落地一组 PR、写 PR 描述 |
+| [delivery-loop](skills/delivery-loop/SKILL.md) | `process` | 通用 | 一轮交付怎么推进、交接、算完 |
+| [review-gate](skills/review-gate/SKILL.md) | `process` | 通用 | 评审流水线与风险归口 |
+| [engineering-standards](skills/engineering-standards/SKILL.md) | `quality` | 通用 | 约定的硬化、分层与门禁 |
+| [contract-prose](skills/contract-prose/SKILL.md) | `quality` | 通用 | 散文只写契约 |
+| [failure-handling](skills/failure-handling/SKILL.md) | `quality` | 通用 | 失败路径设计 |
+| [change-evidence](skills/change-evidence/SKILL.md) | `quality` | 通用 | 改动该跑什么证据 |
+| [readme-writing](skills/readme-writing/SKILL.md) | `quality` | GitHub 与包页面 | README 的读者优先判据 |
+| [change-landing](skills/change-landing/SKILL.md) | `execution` | 通用 | 提交、推送、落地 PR |
 
 一条核心断言贯穿全组：**约定除非有程序会拒绝违规，否则等于不存在。**
 
