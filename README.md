@@ -4,6 +4,9 @@
 
 面向任何软件项目，不绑定某个仓库——仓库专属的脚本名、目录约定与界面常量都留在源材料里，没有带进来。
 
+
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-规范-4D6BFE?style=flat-square)](https://agentskills.io)
+
 ## 安装
 
 ```sh

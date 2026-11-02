@@ -4,13 +4,14 @@ description: >
   当要写、重写或审一份项目 README（GitHub 仓库首页、开源项目主页、npm / PyPI 包页面上那份说明）时使用本 skill：
   按读者分层排出信息层级，决定徽章、logo、截图 / GIF、表格、折叠区用不用、放在哪，找出工程细节混进正文与排版凌乱的
   问题，并在交付前用逐条可判的清单自查。产出对标高 star 开源项目的 README：先服务读者，后服务实现者。
+  判定：删掉这句话之后，目标读者会不会做错决定——不会，就删。
   Use when writing, rewriting, reviewing or auditing a project README: reader layering, information hierarchy,
   badges and media, layout, anti-patterns, and a pre-delivery checklist.
 license: MIT
 metadata:
   face: quality
   author: vlln
-  version: "0.7.0"
+  version: "0.8.0"
 ---
 
 # 写一份读者优先的 README
@@ -28,7 +29,6 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 - HTML 会被清洗：`script`、inline style、`class` / `id` 属性都被移除；图片经 CDN 缓存后再出图。
 - 图片附件单张上限 10 MB；视频上传免费计划 10 MB、付费 100 MB，编码按浏览器，官方推荐 H.264。
 - `gh` 的 `issue` 与 `pr` 的 `create`、`comment`、`edit` 支持 `--attach <文件>#<alt>` 上传图片或视频：正文里对本地文件的引用会被改写成上传后的 `user-attachments` URL。视频渲染为播放器，没有 alt 文本（核对 gh 2.102.0，2026-11-01；用前先 `gh issue create --help` 确认本机版本有这个选项）。
-- shields.io 同时提供动态徽章与静态徽章，也可自托管。
 - 代码块标注语言后才按该语言高亮（高亮由 `github/linguist` 提供）。
 - 深浅色双 logo 的通行写法是 `<picture>` + `media="(prefers-color-scheme: …)"`（uv、sindresorhus/awesome 的 README 源码如此，2026-10-31 读）。
 
@@ -73,8 +73,6 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 
 超过 150 行必须有理由，且理由是**读者需要**，不是"内容重要"。
 
-搬走的内容必须在 README 里留一处链接（`docs/`、`howto/`、生成的文档站都行）；**没有去处，说明那份文档该补上，而不是可以不写**。
-
 首屏内容按项目类型换，判据不换（先回答"这是什么"）：
 
 | 类型 | 首屏给什么 | 观察样本（2026-10-31） |
@@ -84,18 +82,7 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 | 清单 / awesome 列表 | 一句话、目录；不需要安装节 | sindresorhus/awesome |
 | 规范 / 纯文档仓库 | 一句话、分节导览；安装节可省 | anthropics/skills |
 
-**不该进 README 的**，搬走而不是删掉：
-
-| 内容 | 去处 |
-|---|---|
-| 实现细节、架构取舍、设计理由 | `ARCHITECTURE.md` 或 `docs/` |
-| 逐文件说明（`src/foo.ts`：工具函数） | 代码与行内注释 |
-| 开发过程、调试弯路、一次性实验 | 提交信息、issue、博客 |
-| 测试报告、覆盖率数字、手抄的构建结果 | CI 徽章或 CI 报告链接 |
-| 变更流水、版本历史 | `CHANGELOG.md` |
-| 完整 API 参考、全部参数 | `API.md` 或生成的文档站 |
-
-一句话检验：**删掉它，目标读者会不会看不懂？** 会，留下；只有改代码的人才需要，搬走。
+**不该进 README 的**，搬走而不是删掉；去处对照表与一句话检验见 [references/anti-patterns.md](references/anti-patterns.md)。读它的时候：审现有 README、要给"删什么、搬去哪"的结论时。
 
 ## 视觉层：装饰服务于理解
 
@@ -104,7 +91,6 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 - 一枚一个信息，不放同义徽章（两个版本号）。
 - 不放自己不会看的徽章，也不用无信息的装饰徽章。
 - 每枚都有 `alt`，并链到能验证它的页面。
-- 静态徽章可本地托管，省掉每次渲染的外部请求。
 - 一排到底就是徽章墙：读者会跳过整排，连同有用的那枚。
 - 社会证明（star 数、许可）也是合法的真问题，放不放看读者做决策时用不用得上。多于 3 枚时，style 与色系必须全文统一——混排的一排在读者眼里是业余信号。
 
@@ -134,20 +120,9 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 - `##` 章节超过 5 个时给手写 TOC，或依赖宿主的自动 Outline；手写就必须与标题逐条一致。
 - 标点风格整篇统一；中英文之间留一个空格。
 
-## 反模式：真实失败形态与修法
+## 反模式
 
-| 形态 | 为什么坏 | 修法 |
-|---|---|---|
-| 首屏是架构说明（"采用三层架构，位于 `src/core/`"） | 读者还不知道它是什么 | 首屏换定位句加演示，架构搬进 `ARCHITECTURE.md` |
-| 逐文件说明占一整节 | 没人按目录树理解项目 | 删，只留"从哪个文件开始读" |
-| 开发流水账（"最初……后来改成……"） | 只对作者有意义，且会过期 | 搬进 issue 或博客，README 只留结论 |
-| 徽章墙：十几枚 CI、覆盖率、下载、星标 | 噪声淹没信号 | 留 1–3 枚回答真问题的 |
-| 手写覆盖率与测试数字 | 下一次提交就失真 | 换 CI 徽章，或链接 CI 报告 |
-| 装饰压过内容：三屏 GIF 后才有一句说明 | 首屏没有信息 | 把定位句提到视觉之前，或把视觉压进首屏 |
-| 只有安装、没有"它是什么" | 读者无法判断该不该装 | 补一句话定位与目标读者 |
-| 安装块不可复制：`<your-token>`、`...`、多版本混排 | 复制粘贴即失败 | 每个平台一个独立代码块，占位符写进注释 |
-| CHANGELOG 粘进 README | 两处维护，必然漂移 | 只留最近一版加链接 |
-| 手写 TOC 与标题对不上、图片裂图 | 点进去是空的 | 交付前逐条点一遍 |
+十种真实失败形态（徽章墙、手写覆盖率、安装块不可复制……）与各自的修法，见 [references/anti-patterns.md](references/anti-patterns.md)。读它的时候：写完初稿做减法，或审一份现有 README 时。
 
 ## 自检：交付前逐条过
 
@@ -176,4 +151,6 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 21. 视频没有提交进代码分支；用的是托管附件 URL 或外链。
 22. 徽章多于一枚时，全文 `style` 参数与色系统一。
 
-第 5、6、15、17、19、20、21、22 条的取证动作见 `references/self-check.md`；徽章的来源目录见 `references/badges.md`，深浅色图、折叠区等的可复制片段见 `references/visual-cookbook.md`。
+- 自检的取证动作：[references/self-check.md](references/self-check.md)。读它的时候：清单里某条靠肉眼判不了，或要给别人一份可复核的审查结论。
+- 徽章来源目录：[references/badges.md](references/badges.md)。读它的时候：要加徽章、徽章裂图或数值不更新、要做自定义或私有徽章。
+- 视觉片段库：[references/visual-cookbook.md](references/visual-cookbook.md)。读它的时候：要往 README 里加徽章、深浅色图、演示视频、功能展示单元、折叠区。
