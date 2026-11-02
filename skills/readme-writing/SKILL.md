@@ -10,7 +10,7 @@ license: MIT
 metadata:
   face: quality
   author: vlln
-  version: "0.6.0"
+  version: "0.7.0"
 ---
 
 # 写一份读者优先的 README
@@ -176,4 +176,4 @@ README 是给陌生人的落地页，不是给实现者的汇报材料。总判�
 21. 视频没有提交进代码分支；用的是托管附件 URL 或外链。
 22. 徽章多于一枚时，全文 `style` 参数与色系统一。
 
-第 5、6、15、17、19、20、21、22 条的取证动作见 `references/self-check.md`；徽章、深浅色图、折叠区的可复制片段见 `references/visual-cookbook.md`。
+第 5、6、15、17、19、20、21、22 条的取证动作见 `references/self-check.md`；徽章的来源目录见 `references/badges.md`，深浅色图、折叠区等的可复制片段见 `references/visual-cookbook.md`。
