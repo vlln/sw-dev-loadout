@@ -1,9 +1,10 @@
 ---
 name: review-gate
-description: 当你要评审一个 PR、被要求「审查一下这个改动」、要判断一处发现算不算阻塞、要判断一条要求是不是在所有分支上都可满足、评审来回多轮仍未收敛、或者要决定这次合并该由谁批准时使用本 skill。组织独立发现、核验发现、按轮次收敛、按实际风险分级并路由到该决定的人，把人需要看的东西压到最少。判定：只要你要么下评审结论、要么决定谁有资格放行，就用它。
+description: A change review and approval workflow. Use when organizing pull request reviews, resolving review findings, or deciding whether a change is ready for approval.
 license: MIT
 metadata:
   face: process
+  domain: software-development
   author: vlln
   version: "3.1.0"
 ---

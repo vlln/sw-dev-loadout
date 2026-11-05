@@ -2,7 +2,7 @@
 
 **何时读它**：要给 README 选徽章、现有徽章裂图或数值不更新、要做自定义或私有徽章时。
 
-选不选、放几枚、样式统一的规则在 `SKILL.md`（视觉层）；这里只回答两个问题：**徽章从哪来**、**URL 怎么写**。
+数量与适用条件见 `SKILL.md` 的“易错点与按需材料”；多枚徽章样式统一，语义色可不同。这里只回答：**徽章从哪来**、**URL 怎么写**。
 
 URL 格式与服务能力核对于 **2026-11-02**（抽样实测，见文末）；服务方改格式时以其文档为准重核。
 
@@ -22,7 +22,7 @@ URL 格式与服务能力核对于 **2026-11-02**（抽样实测，见文末）�
 
 通用查询参数（所有 shields 徽章都能加）：
 
-- `style`：`flat`（默认）/ `flat-square` / `plastic` / `for-the-badge` / `social`——**一份 README 全文只用一种**（SKILL.md 自检第 22 条）。
+- `style`：`flat`（默认）/ `flat-square` / `plastic` / `for-the-badge` / `social`——**一份 README 全文只用一种**（样式统一，语义色按信息决定）。
 - `color` / `labelColor`：左右两边的颜色，接受 hex、rgb()、css 颜色名。
 - `label`：改写左侧文字。
 - `logo`：[simple-icons](https://simpleicons.org/) 的 slug；`logoColor` 配色；`logoSize=auto` 给宽图标。
@@ -115,21 +115,9 @@ URL 格式与服务能力核对于 **2026-11-02**（抽样实测，见文末）�
 
 社区里出现过第三方"verified"徽章服务，未见稳定公认的，先不放。
 
-**DSH 官方徽章**。DeepSeek Harness 自带一个内置 skill `dsh-badge`（npm 包 `@deepseek-ai/dsh-skill-badge`），它规定的官方徽章：
+**产品兼容性徽章**：仅在兼容范围经过核实时使用，链到实际兼容性说明。应用名与版本范围从目标项目取得，不默认任何特定 Agent 应用已经安装或提供徽章工具。
 
-```markdown
-[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
-```
-
-使用规则（官方 skill 原文，核对 2026-11-02，本机安装的 dsh 内）：放在文档或章节的**末尾**；不改颜色、logo、措辞与链接目标；渲染尺寸 121×20；飞书这类远程图片加载不可靠的系统里改用包内 PNG 资产，不要另生成一枚。徽章 URL 实测 200。
-
-**DSH 插件兼容徽章**（社区约定，非官方）：宿主版本与平台用静态徽章写，例如：
-
-```markdown
-![DeepSeek Harness 0.2.x](https://img.shields.io/badge/DeepSeek%20Harness-0.2.x-111?style=flat-square)
-```
-
-来源：dsh-media-desk README（核对 2026-11-01）。版本号会过期，写成 `0.2.x` 这种区间比写死小版本活得久。
+品牌徽章以品牌发布的公开规范为准；颜色、标志与署名要求不可从作者本地安装环境推断。没有公开来源时，不将本地工具的行为写成通用规则。
 
 `logo=deepseek` 在 simple-icons 里存在（2026-11-02 实测：渲染出的 SVG 含图标；不存在的 slug 会静默掉图标，所以用前照这个方法验一次）。
 

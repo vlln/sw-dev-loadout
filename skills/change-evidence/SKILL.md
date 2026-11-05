@@ -1,9 +1,10 @@
 ---
 name: change-evidence
-description: 当你要决定「这个改动该跑哪些测试」、要在推送前取舍检查范围、要调查 CI 上的不稳定失败，或者要判断某次绿灯算不算证据时使用本 skill。先定改动触达的表面，再选那个会因该回归而失败的最窄检查，区分 hook、本地与 CI 的分工，并让证据真的可能失败。判定：如果一条证据在任何实现下都会通过，它不是证据。
+description: Criteria for sufficient change verification. Use when choosing tests for a change or assessing whether test results and measurements support a claim.
 license: MIT
 metadata:
   face: quality
+  domain: software-development
   author: vlln
   version: "3.1.0"
 ---
@@ -97,6 +98,8 @@ Git hook 故意很窄，因为慢 hook 会被绕过，绕过一次就永远失�
 隔离与竞态的具体做法、超时预算、平台差异清单见 [确定性测试](references/determinism.md)。读它的时候：在写涉及端口、临时目录、时钟、子进程、并发或拆卸的测试，或在调查一次偶发失败。
 
 ## 证明它真的会失败
+
+如果一条证据在任何实现下都会通过，它不是证据。
 
 - 有条件时，先在修复之前观察一次普通回归失败。
 - 改动本身新增了守卫时，临时引入被拒的那一例，观察预期失败。

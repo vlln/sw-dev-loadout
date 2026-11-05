@@ -1,9 +1,10 @@
 ---
 name: delivery-loop
-description: 当一项开发工作要跨多次会话推进、需要接手别人留下的在途工作、用户中途插单或改变范围、或者你要判断「这算做完了吗」时使用本 skill。维护承诺、阶段关口、变更传播、进度与恢复点，并区分实施完成、验证通过、验收接受、实际交付与运行健康。判定：如果这次输入可能改变已承诺的范围、基线或完成条件，或者你的完成声明需要说清属于哪一层，就用它。
+description: A software delivery workflow. Use when coordinating development across sessions or contributors, changing scope, or deciding whether a delivery is complete.
 license: MIT
 metadata:
   face: process
+  domain: software-development
   author: vlln
   version: "3.0.0"
 ---

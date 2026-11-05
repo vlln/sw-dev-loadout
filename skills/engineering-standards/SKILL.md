@@ -1,9 +1,10 @@
 ---
 name: engineering-standards
-description: 当为项目建立或审计工程规范、规范写了却落不了地、agent 反复忘记约定、文档与代码漂移、或者要新增一个门禁时使用本 skill。把机械可查的约定硬化成会拒绝违规并自证的门禁，把常驻规则分层并给字数预算，用带生命周期的决策记录承载理由，按项目寿命分档采纳。判定：标准是「有没有程序会拒绝违规」，不是「文档里写了没有」。
+description: Standards for enforceable engineering rules. Use when establishing project conventions or auditing rules that are ignored or have drifted from the code.
 license: MIT
 metadata:
   face: quality
+  domain: software-development
   author: vlln
   version: "3.0.0"
 ---

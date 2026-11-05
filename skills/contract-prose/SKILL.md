@@ -1,9 +1,10 @@
 ---
 name: contract-prose
-description: 当你要写或审模块注释、公开 API 文档、README、提示词、界面文案与诊断信息，要清理「以前」「现在」「不再」这类叙述，要判断某处该不该有文档，或者要把读起来像思考过程的文字改回契约时使用本 skill。保留契约与非显然的定位，删掉实现叙述、变更故事、评审历史与被否决的方案，只写当前态。判定：这句话是代码表达不了的义务，还是作者的推理过程——前者留，后者删。
+description: Standards for contract-bearing technical prose. Use when writing or reviewing comments, documentation, prompts, or product text that others rely on to act correctly.
 license: MIT
 metadata:
   face: quality
+  domain: documentation
   author: vlln
   version: "3.0.0"
 ---

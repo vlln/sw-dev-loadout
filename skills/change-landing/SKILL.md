@@ -1,9 +1,10 @@
 ---
 name: change-landing
-description: 当你要提交、推送、改写历史、把一组有依赖的 PR 落地、开 PR 或改写描述，或者要在多人、多 agent 并行写同一个仓库时避免吞掉别人的改动时使用本 skill。选对分支与工作区、按性质切片、用平台官方的依赖链机制、只用带期望值的强推、推完核对远端与 CI，并把 PR 描述写成「为什么」而不是「改了什么」。判定：这次动作会不会改变远端或别人的工作——会，就先看授权与顺序。
+description: Git and pull request operations for landing changes safely. Use when committing, pushing, rewriting history, or merging changes in a shared repository.
 license: MIT
 metadata:
   face: execution
+  domain: software-development
   author: vlln
   version: "3.0.0"
 ---

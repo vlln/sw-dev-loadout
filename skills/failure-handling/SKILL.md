@@ -1,9 +1,10 @@
 ---
 name: failure-handling
-description: 当你要写会失败的操作、要加一个 catch、要决定失败后能不能继续、要设计重试或超时、要审用户看到的错误信息，或者要判断这次「处理了异常」是否真的安全时使用本 skill。给失败声明类型、指定处理与报告的所有者、说清失败后的状态保证，并在捕获、恢复与停止之间做出选择。判定：说不出「失败之后什么仍然安全」，就还没有资格捕获。
+description: Standards for safe failure handling. Use when designing or reviewing error propagation, recovery, retries, timeouts, or user-facing error reports.
 license: MIT
 metadata:
   face: quality
+  domain: software-development
   author: vlln
   version: "3.0.0"
 ---
